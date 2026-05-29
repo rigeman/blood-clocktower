@@ -3,6 +3,6 @@
   "sub_project_type": "",
   "name": "血染钟楼",
   "app_slug": "blood-clocktower",
-  "version_description": "完成游戏核心引擎和界面搭建",
+  "version_description": "重构为纯前端应用",
   "preview_type": "pc"
 }

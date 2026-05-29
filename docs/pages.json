@@ -13,10 +13,5 @@
     "pageKey": "Game",
     "title": "Game",
     "url": "/game"
-  },
-  {
-    "pageKey": "Lobby",
-    "title": "Lobby",
-    "url": "/lobby"
   }
 ]

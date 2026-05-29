@@ -2,23 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FadeIn } from '@/components/MotionPrimitives';
 import { Button } from '@/components/ui/button';
-import { Skull, Eye, Users, Swords, BookOpen, ChevronRight } from 'lucide-react';
+import { Skull, Eye, Users, Swords, BookOpen, ChevronRight, Settings } from 'lucide-react';
 import type { GameMode } from '@/game/types';
-import { createGame, startGame, generateAiDiscussions } from '@/game/engine';
 
 export default function Index() {
   const navigate = useNavigate();
   const [selectedMode, setSelectedMode] = useState<GameMode>('player');
 
   const handleStart = () => {
-    const game = createGame(7, selectedMode, '你');
-    const started = startGame(game);
-    // Generate initial AI discussion
-    const aiMessages = generateAiDiscussions(started);
-    for (const msg of aiMessages) {
-      started.discussions.push(msg);
-    }
-    navigate('/game', { state: { game: started } });
+    navigate('/setup', { state: { mode: selectedMode } });
   };
 
   return (

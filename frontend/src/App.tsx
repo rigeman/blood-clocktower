@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatedRoutes } from "@/components/AnimatedRoutes";
 import { PageTransition } from "@/components/PageTransition";
 import Index from "./pages/Index";
+import Setup from "./pages/Setup";
 import GameBoard from "./pages/GameBoard";
 import Characters from "./pages/Characters";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ function App() {
         <BrowserRouter>
           <AnimatedRoutes>
             <Route path="/" data-genie-title="Home" data-genie-key="Home" element={<PageTransition transition="fade"><Index /></PageTransition>} />
+            <Route path="/setup" data-genie-title="Setup" data-genie-key="Setup" element={<PageTransition transition="slide-up"><Setup /></PageTransition>} />
             <Route path="/game" data-genie-title="Game" data-genie-key="Game" element={<PageTransition transition="fade"><GameBoard /></PageTransition>} />
             <Route path="/characters" data-genie-title="Characters" data-genie-key="Characters" element={<PageTransition transition="slide-up"><Characters /></PageTransition>} />
             <Route path="*" data-genie-key="NotFound" data-genie-title="Not Found" element={<PageTransition transition="fade"><NotFound /></PageTransition>} />

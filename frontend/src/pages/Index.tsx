@@ -3,11 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { FadeIn } from '@/components/MotionPrimitives';
 import { Button } from '@/components/ui/button';
 import { Skull, Eye, Users, Swords, BookOpen, ChevronRight } from 'lucide-react';
-import type { GameMode } from '@/types/game';
+import type { GameMode } from '@/game/types';
+import { createGame, startGame, generateAiDiscussions } from '@/game/engine';
 
 export default function Index() {
   const navigate = useNavigate();
   const [selectedMode, setSelectedMode] = useState<GameMode>('player');
+
+  const handleStart = () => {
+    const game = createGame(7, selectedMode, '你');
+    const started = startGame(game);
+    // Generate initial AI discussion
+    const aiMessages = generateAiDiscussions(started);
+    for (const msg of aiMessages) {
+      started.discussions.push(msg);
+    }
+    navigate('/game', { state: { game: started } });
+  };
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--background)' }}>
@@ -16,7 +28,6 @@ export default function Index() {
         className="relative flex flex-col items-center justify-center py-24 px-4 overflow-hidden"
         style={{ background: 'var(--hero)', minHeight: '70vh' }}
       >
-        {/* Atmospheric overlay */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -33,7 +44,7 @@ export default function Index() {
               className="font-bold mb-4 glow-crimson"
               style={{
                 fontFamily: 'var(--font-family-display)',
-                fontSize: 'var(--font-size-display)',
+                fontSize: 'clamp(2rem, 5vw, var(--font-size-display))',
                 color: 'var(--foreground)',
                 letterSpacing: 'var(--letter-spacing-wide)',
               }}
@@ -88,14 +99,8 @@ export default function Index() {
                   玩家模式
                 </span>
               </div>
-              <p
-                style={{
-                  fontSize: 'var(--font-size-small)',
-                  color: 'var(--muted-foreground)',
-                  textAlign: 'left',
-                }}
-              >
-                作为角色与AI对战，系统自动管理夜晚流程
+              <p style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)', textAlign: 'left' }}>
+                作为角色与AI对战，系统自动管理夜晚
               </p>
             </button>
 
@@ -121,24 +126,17 @@ export default function Index() {
                   说书人模式
                 </span>
               </div>
-              <p
-                style={{
-                  fontSize: 'var(--font-size-small)',
-                  color: 'var(--muted-foreground)',
-                  textAlign: 'left',
-                }}
-              >
-                主持游戏、控制夜晚行动，AI玩家互相博弈
+              <p style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)', textAlign: 'left' }}>
+                主持游戏、控制夜晚，AI互相博弈
               </p>
             </button>
           </div>
         </FadeIn>
 
-        {/* CTA Button */}
         <FadeIn delay={0.5}>
           <div className="relative z-10 mt-8">
             <Button
-              onClick={() => navigate('/lobby', { state: { mode: selectedMode } })}
+              onClick={handleStart}
               size="lg"
               className="px-12 py-6 text-lg cursor-pointer"
               style={{
@@ -148,14 +146,14 @@ export default function Index() {
                 letterSpacing: 'var(--letter-spacing-wide)',
               }}
             >
-              进入游戏
+              开始游戏
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
         </FadeIn>
       </div>
 
-      {/* Features Section */}
+      {/* Features */}
       <div className="py-16 px-4" style={{ background: 'var(--background)' }}>
         <div className="container max-w-5xl">
           <FadeIn>
@@ -174,30 +172,12 @@ export default function Index() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              {
-                icon: Users,
-                title: 'AI社交博弈',
-                desc: '混元大模型驱动的AI玩家，具备推理、欺骗、结盟与背叛能力',
-                color: 'var(--primary)',
-              },
-              {
-                icon: Skull,
-                title: '完整昼夜循环',
-                desc: '夜晚角色行动、白天讨论投票，忠实还原桌游体验',
-                color: 'var(--theme-gold)',
-              },
-              {
-                icon: BookOpen,
-                title: '丰富角色系统',
-                desc: '城镇居民、外来者、爪牙、恶魔四大阵营，每个角色拥有独特能力',
-                color: 'var(--theme-purple)',
-              },
+              { icon: Users, title: 'AI社交博弈', desc: 'AI玩家具备推理、欺骗、结盟与背叛能力', color: 'var(--primary)' },
+              { icon: Skull, title: '完整昼夜循环', desc: '夜晚角色行动、白天讨论投票，忠实还原桌游体验', color: 'var(--theme-gold)' },
+              { icon: BookOpen, title: '丰富角色系统', desc: '城镇居民、外来者、爪牙、恶魔四大阵营，22个角色', color: 'var(--theme-purple)' },
             ].map((feature, i) => (
               <FadeIn key={i} delay={0.2 + i * 0.1}>
-                <div
-                  className="p-6 rounded-lg card-glow"
-                  style={{ background: 'var(--card)' }}
-                >
+                <div className="p-6 rounded-lg card-glow" style={{ background: 'var(--card)' }}>
                   <feature.icon className="w-8 h-8 mb-4" style={{ color: feature.color }} />
                   <h3
                     className="mb-2"
@@ -220,14 +200,26 @@ export default function Index() {
         </div>
       </div>
 
+      {/* Character Guide Link */}
+      <div className="pb-16 text-center">
+        <Button
+          onClick={() => navigate('/characters')}
+          variant="outline"
+          className="px-8 py-4 cursor-pointer"
+          style={{
+            fontFamily: 'var(--font-family-display)',
+            letterSpacing: 'var(--letter-spacing-wide)',
+            borderColor: 'var(--border)',
+            color: 'var(--foreground)',
+          }}
+        >
+          <BookOpen className="w-4 h-4 mr-2" />
+          查看角色图鉴
+        </Button>
+      </div>
+
       {/* Footer */}
-      <div
-        className="py-8 text-center gothic-divider"
-        style={{
-          borderTop: '1px solid',
-          borderColor: 'var(--border)',
-        }}
-      >
+      <div className="py-8 text-center" style={{ borderTop: '1px solid var(--border)' }}>
         <p style={{ fontSize: 'var(--font-size-small)', color: 'var(--muted-foreground)' }}>
           Blood on the Clocktower - AI Social Deduction Game
         </p>

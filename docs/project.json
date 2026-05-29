@@ -1,0 +1,8 @@
+{
+  "project_type": "web",
+  "sub_project_type": "",
+  "name": "血染钟楼",
+  "app_slug": "blood-clocktower",
+  "version_description": "完成游戏核心引擎和界面搭建",
+  "preview_type": "pc"
+}

@@ -1,0 +1,4 @@
+[2026-05-29 01:17:17] [INFO] ==== setup-project.js =====
+[2026-05-29 01:17:17] [DEBUG] [PPT Setup] stdin 数据: {"session_id":"abdd891c-e9b3-4989-9930-76258f81b762","transcript_path":"/root/.codebuddy/projects/workspace/abdd891c-e9b3-4989-9930-76258f81b762.jsonl","cwd":"/workspace","hook_event_name":"PreToolUse","tool_name":"Skill","tool_input":{"args":"血染钟楼 - AI社交推理游戏。暗黑哥特风格的多AI玩家社交推理游戏应用，玩家可以选择说书人模式或普通玩家模式与AI一起游玩血染钟楼。","skill":"web-implement"},"call_id":"call_73079e818c3c4a6a9f99e5f4","tool_use_id":"call_73079e818c3c4a6a9f99e5f4","agent_type":"cli","permission_mode":"dontAsk","client":"CLI","version":"2.98.1","generation_id":"3914b52ded094bdf852421ef987eebe1","model":"glm-5.1"}
+[2026-05-29 01:17:17] [INFO] [PPT Setup] skill: web-implement
+[2026-05-29 01:17:17] [INFO] [PPT Setup] 跳过: skill 是 "web-implement"，不是 "ppt-implement"

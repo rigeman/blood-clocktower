@@ -1,0 +1,22 @@
+[
+  {
+    "pageKey": "Home",
+    "title": "Home",
+    "url": "/"
+  },
+  {
+    "pageKey": "Characters",
+    "title": "Characters",
+    "url": "/characters"
+  },
+  {
+    "pageKey": "Game",
+    "title": "Game",
+    "url": "/game"
+  },
+  {
+    "pageKey": "Lobby",
+    "title": "Lobby",
+    "url": "/lobby"
+  }
+]

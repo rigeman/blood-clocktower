@@ -1,0 +1,390 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* === 圆角 === */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* === 核心颜色 === */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* === 功能颜色 === */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* === 主题特色颜色 === */
+  --color-theme-red: var(--theme-red);
+  --color-theme-green: var(--theme-green);
+  --color-theme-gold: var(--theme-gold);
+  --color-theme-blue: var(--theme-blue);
+  --color-theme-purple: var(--theme-purple);
+  --color-theme-crimson: var(--theme-crimson);
+
+  /* === 阵营颜色 === */
+  --color-faction-good: var(--faction-good);
+  --color-faction-evil: var(--faction-evil);
+  --color-faction-neutral: var(--faction-neutral);
+
+  /* === 图表颜色 === */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* === 侧边栏颜色 === */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* === Hero 区域颜色 === */
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+
+  /* === 阴影 === */
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+
+  /* === 字号 === */
+  --text-xs: var(--font-size-small);
+  --text-sm: var(--font-size-label);
+  --text-base: var(--font-size-body);
+}
+
+:root {
+  /* === 圆角基准值 === */
+  --radius: 0.625rem;
+
+  /* === 字体排版 - 哥特风格 === */
+  --font-family: "Crimson Text", Georgia, "Times New Roman", serif;
+  --font-family-display: "Cinzel", Georgia, "Times New Roman", serif;
+  --font-size-display: 3.5rem;
+  --font-size-headline: 2rem;
+  --font-size-title: 1.5rem;
+  --font-size-body: 1rem;
+  --font-size-label: 0.875rem;
+  --font-size-small: 0.75rem;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --line-height: 1.5;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.1em;
+
+  /* === 间距系统 === */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* === 阴影层级 - 暗色优先 === */
+  --ds-shadow-sm: 0 1px 3px oklch(0 0 0 / 0.3);
+  --ds-shadow-md: 0 4px 12px oklch(0 0 0 / 0.4), 0 2px 4px oklch(0 0 0 / 0.3);
+  --ds-shadow-lg: 0 8px 24px oklch(0 0 0 / 0.5), 0 4px 8px oklch(0 0 0 / 0.4);
+  --ds-shadow-xl: 0 16px 48px oklch(0 0 0 / 0.6), 0 8px 16px oklch(0 0 0 / 0.5);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+
+  /* === 动效时间 === */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ================================================
+     暗黑哥特配色 - 主色调
+     ================================================ */
+
+  /* === 背景颜色 - 深邃暗夜 === */
+  --background: oklch(0.12 0.01 270);
+  --foreground: oklch(0.92 0.01 60);
+
+  /* === 卡片 - 深灰带微紫 === */
+  --card: oklch(0.18 0.015 280);
+  --card-foreground: oklch(0.92 0.01 60);
+
+  /* === 弹出层 === */
+  --popover: oklch(0.16 0.015 280);
+  --popover-foreground: oklch(0.92 0.01 60);
+
+  /* === 主色调 - 暗红鲜血 === */
+  --primary: oklch(0.55 0.2 25);
+  --primary-foreground: oklch(0.97 0.01 60);
+
+  /* === 次要色 - 暗紫 === */
+  --secondary: oklch(0.22 0.03 280);
+  --secondary-foreground: oklch(0.88 0.01 60);
+
+  /* === 柔和色 === */
+  --muted: oklch(0.22 0.02 270);
+  --muted-foreground: oklch(0.65 0.02 270);
+
+  /* === 强调色 - 暗金 === */
+  --accent: oklch(0.65 0.15 75);
+  --accent-foreground: oklch(0.12 0.01 270);
+
+  /* === 危险/错误色 - 深红 === */
+  --destructive: oklch(0.55 0.25 20);
+
+  /* === 边框和输入框 === */
+  --border: oklch(0.30 0.02 270);
+  --input: oklch(0.25 0.02 270);
+  --ring: oklch(0.55 0.2 25);
+
+  /* === 功能颜色 === */
+  --success: oklch(0.60 0.15 155);
+  --success-foreground: oklch(0.12 0.01 270);
+  --warning: oklch(0.75 0.17 65);
+  --warning-foreground: oklch(0.12 0.01 270);
+  --info: oklch(0.55 0.15 250);
+  --info-foreground: oklch(0.97 0.01 60);
+
+  /* === 主题特色颜色 === */
+  --theme-red: oklch(0.55 0.25 25);
+  --theme-green: oklch(0.55 0.15 155);
+  --theme-gold: oklch(0.75 0.17 75);
+  --theme-blue: oklch(0.55 0.15 250);
+  --theme-purple: oklch(0.50 0.18 300);
+  --theme-crimson: oklch(0.45 0.28 15);
+
+  /* === 阵营颜色 === */
+  --faction-good: oklch(0.65 0.15 250);
+  --faction-evil: oklch(0.55 0.25 25);
+  --faction-neutral: oklch(0.65 0.12 75);
+
+  /* === 图表颜色 === */
+  --chart-1: oklch(0.55 0.25 25);
+  --chart-2: oklch(0.55 0.15 155);
+  --chart-3: oklch(0.75 0.17 75);
+  --chart-4: oklch(0.50 0.18 300);
+  --chart-5: oklch(0.55 0.15 250);
+
+  /* === 侧边栏 === */
+  --sidebar: oklch(0.14 0.015 280);
+  --sidebar-foreground: oklch(0.92 0.01 60);
+  --sidebar-primary: oklch(0.55 0.2 25);
+  --sidebar-primary-foreground: oklch(0.97 0.01 60);
+  --sidebar-accent: oklch(0.22 0.03 280);
+  --sidebar-accent-foreground: oklch(0.92 0.01 60);
+  --sidebar-border: oklch(0.30 0.02 270);
+  --sidebar-ring: oklch(0.55 0.2 25);
+
+  /* === Hero 区域 - 极深背景 === */
+  --hero: oklch(0.08 0.02 270);
+  --hero-foreground: oklch(0.92 0.01 60);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-display);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+}
+
+/* Tailwind v4: container no longer auto-centers. Restore v3 behavior. */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1536px) { max-width: 1536px; }
+}
+
+/* ================================================================
+   Gothic Special Effects
+   ================================================================ */
+
+/* 血红色发光效果 */
+.glow-crimson {
+  text-shadow: 0 0 10px oklch(0.55 0.25 25 / 0.6), 0 0 30px oklch(0.45 0.28 15 / 0.3);
+}
+
+/* 金色发光效果 */
+.glow-gold {
+  text-shadow: 0 0 10px oklch(0.75 0.17 75 / 0.5), 0 0 20px oklch(0.65 0.15 75 / 0.25);
+}
+
+/* 卡片悬浮发光边框 */
+.card-glow {
+  box-shadow: 0 0 0 1px oklch(0.30 0.02 270), inset 0 0 20px oklch(0.12 0.01 270 / 0.5);
+  transition: box-shadow var(--duration-normal) var(--ease-default);
+}
+.card-glow:hover {
+  box-shadow: 0 0 0 1px oklch(0.55 0.2 25 / 0.5), 0 0 20px oklch(0.55 0.25 25 / 0.15), inset 0 0 20px oklch(0.12 0.01 270 / 0.5);
+}
+
+/* 钟楼圆形布局 */
+.clocktower-ring {
+  position: relative;
+}
+
+/* 死亡玩家标记 */
+.player-dead {
+  opacity: 0.5;
+  filter: grayscale(0.8);
+}
+
+/* 幽灵投票标记 */
+.ghost-vote::after {
+  content: "👻";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 0.75rem;
+}
+
+/* 夜晚阶段滤镜 */
+.phase-night {
+  filter: brightness(0.7) saturate(0.8);
+}
+
+/* 白天阶段 */
+.phase-day {
+  filter: brightness(1) saturate(1);
+}
+
+/* 角色卡背面 - 神秘纹样 */
+.role-card-back {
+  background: linear-gradient(135deg, oklch(0.18 0.015 280), oklch(0.12 0.01 270));
+  border: 1px solid oklch(0.30 0.02 270);
+}
+
+/* 哥特式分隔线 */
+.gothic-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, oklch(0.55 0.2 25 / 0.5), oklch(0.75 0.17 75 / 0.5), oklch(0.55 0.2 25 / 0.5), transparent);
+}
+
+/* 血迹效果 */
+.blood-drip {
+  background: linear-gradient(180deg, oklch(0.55 0.25 25), oklch(0.45 0.28 15 / 0));
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
+}
+
+/* ================================================================
+   Page Transition System
+   ================================================================ */
+.page-transition {
+  transition:
+    opacity var(--duration-normal, 200ms) var(--ease-default, ease),
+    transform var(--duration-normal, 200ms) var(--ease-default, ease),
+    filter var(--duration-normal, 200ms) var(--ease-default, ease);
+}
+
+.page-transition.fade-out { opacity: 0; }
+.page-transition.fade-in  { opacity: 1; }
+
+.page-transition[data-transition="slide-up"].fade-out {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.page-transition[data-transition="slide-up"].fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition[data-transition="slide-fade"].fade-out {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+.page-transition[data-transition="slide-fade"].fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-transition[data-transition="blur-fade"].fade-out {
+  opacity: 0;
+  filter: blur(12px);
+}
+.page-transition[data-transition="blur-fade"].fade-in {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+.page-transition[data-transition="scale"].fade-out {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.page-transition[data-transition="scale"].fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition[data-transition="bounce"] {
+  transition:
+    opacity var(--duration-normal, 200ms) var(--ease-default, ease),
+    transform var(--duration-slow, 300ms) var(--ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1)),
+    filter var(--duration-normal, 200ms) var(--ease-default, ease);
+}
+.page-transition[data-transition="bounce"].fade-out {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.page-transition[data-transition="bounce"].fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition[data-transition="none"] {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    transition: none !important;
+  }
+}
